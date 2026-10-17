@@ -91,9 +91,16 @@ function setBusy(b) {
   $('teacherMic').disabled=b;
   $('speakBtn').disabled=b||!state.lastAnswer;
 }
-function appendNote(text, fromVoice=false) {
+function readNotes(id) {
+  try { const all=JSON.parse(sessionStorage.getItem('hoshyar-demo-notes')||'{}'); return Array.isArray(all[id])?all[id]:[]; } catch { return []; }
+}
+function saveStoredNotes() {
+  try { const all=JSON.parse(sessionStorage.getItem('hoshyar-demo-notes')||'{}'); all[validLectureId()]=state.segments; sessionStorage.setItem('hoshyar-demo-notes',JSON.stringify(all)); } catch { toast('Unable to save browser notes; they may not survive a refresh.',true); }
+}
+function appendNote(text, fromVoice=false, restoring=false) {
   const note={text, time:isoTime(),fromVoice};
   state.segments.push(note);
+  if(!isLive() && !restoring) saveStoredNotes();
   const list=$('savedNotes');
   if(state.segments.length===1) list.replaceChildren();
   const article=document.createElement('div'); article.className='note-item';
@@ -132,7 +139,7 @@ function sampleAnswer(question) {
       :'ئەمە تەنها دیمۆیە. یەکەم جار تێبینییەکانی مامۆستات زیاد بکە، پاشان پرسیار بکە. وەڵامی ڕاستەقینە پێویستی بە Gemini هەیە.';
   }
   if(!transcript) return 'DEMO EXAMPLE (not Gemini):\n\nI haven’t received any teacher notes yet. Try adding a lesson in the left panel, then ask your question again. In Live n8n mode, Gemini can answer from your saved lecture.';
-  if(lower.includes('ohm')||/\b(voltage|current|resistance)\b/i.test(transcript)) {
+  if((/ohm|voltage|current|resistance/i.test(lower)) && /ohm|voltage|current|resistance/i.test(transcript)) {
     return `DEMO EXAMPLE (not Gemini):\n\nThe teacher's notes mention: “${transcript.slice(0,180)}”\n\nHere is a simple explanation:\nVoltage is like the push that moves water. Current is how much flows. Resistance makes that flow harder.\n\nOhm’s Law: V = I × R.\n\nWhen Live mode is enabled, Gemini will generate the actual explanation using your lecture.`;
   }
   return `DEMO EXAMPLE (not Gemini):\n\nI found this in your teacher's notes:\n“${transcript.slice(0,280)}”\n\nStart by finding the main idea, then think of one everyday example. Ask “why” and “how” until each step makes sense.\n\nThis is a sample preview; Gemini will generate the real answer when Live mode is securely enabled.`;
@@ -208,6 +215,7 @@ async function toggleRecord(purpose) {
     state.recorder.stop();return;
   }
   if(state.busy) return;
+  if(!isLive()) return toast('Microphone transcription is not available in demo mode. Please type your notes or question.', true);
   if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder) return toast('Microphone recording requires Chrome/Edge on localhost or HTTPS.',true);
   try {
     validLectureId();
@@ -258,7 +266,8 @@ function resetForLecture() {
   $('speakBtn').disabled=true;
   $('conversation').innerHTML='<div class="starter"><div class="assistant-avatar">✦</div><div class="starter-bubble"><strong>New lecture selected</strong><p>Add teacher notes, then start asking about the lesson.</p></div></div>';
   $('sideLectureName').textContent=value('lectureId')||'class-001';
-  toast('Switched lecture. Your earlier server-side notes are still stored under their original ID.');
+  if(!isLive()) { const notes=readNotes(validLectureId()); notes.slice(-70).forEach(note=>appendNote(note.text, !!note.fromVoice, true)); }
+  toast('Switched lecture. Notes are kept separately for each lecture ID.');
 }
 function start() {
   $('demoMode').addEventListener('click',()=>setMode('demo'));
@@ -269,6 +278,7 @@ function start() {
   $('teacherMic').addEventListener('click',()=>toggleRecord('teacher'));
   $('studentMic').addEventListener('click',()=>toggleRecord('student'));
   $('lectureId').addEventListener('change',resetForLecture);
+  if(!isLive()) readNotes(validLectureId()).slice(-70).forEach(note=>appendNote(note.text,!!note.fromVoice,true));
   document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('.nav-link').forEach(x=>x.classList.toggle('selected',x===b));
     document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'});
