@@ -1,16 +1,16 @@
-# Hoshyar AI - Render Static Site
+# Hoshyar AI — Free GitHub Pages preview
 
-A safe public demonstration of the Hoshyar AI classroom interface.
+Free static classroom demo, hosted from `main` at https://usabazaar827-collab.github.io/hoshyar/. No build step or credit card.
 
-## Deployment
-1. Connect Render with ChatGPT or upload the files into a Git repository.
-2. Create a new Render Static Site, using render.yaml as a Blueprint, or:
-   - Build Command: `mkdir -p public && cp index.html styles.css app.js public/`
-   - Publish Directory: `public`
-3. Open the onrender.com URL provided after deployment.
+## Quick start
+1. Give your lesson a short ID (example: `class-001`).
+2. Paste your teacher notes and save them. Notes survive a refresh in the same browser tab.
+3. Ask a question. Answers are **sample demo responses, not Gemini**.
+4. Listen to an English sample answer using built-in browser speech synthesis, when supported.
+5. Use Language settings only when you need them.
 
-## Security and state
-- Demo mode only: the public website does not call n8n, ElevenLabs or Gemini.
-- Live AI requires secure authentication, per-user quotas, and an authenticated backend proxy.
-- No API keys are included in this static website.
-- Microphone access can be requested by the browser, but live speech transcription is not enabled yet.
+## Privacy and current limitations
+- Everything is demo-only: no Gemini or ElevenLabs calls and no API secrets in the public browser.
+- Teacher and student microphone inputs are disabled until the secured live service is connected.
+- Demo notes are saved in `sessionStorage` under each lecture ID. They are not shared with other users or devices and may disappear when the tab is closed.
+- Live deployment will need authenticated endpoints, abuse prevention, a backend proxy, recording consent and careful CORS settings.

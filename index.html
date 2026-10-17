@@ -10,54 +10,38 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar" aria-label="Main navigation">
-      <div class="brand"><div class="brand-icon"><span>✦</span></div><div class="brand-copy"><strong>Hoshyar<span> AI</span></strong><small>هۆشیار • Study smarter</small></div></div>
-      <div class="nav-caption">WORKSPACE</div>
-      <nav class="nav-main">
-        <button class="nav-link selected" data-scroll="studio"><span class="nav-icon">▦</span> Classroom <span class="tiny-pill">NEW</span></button>
-        <button class="nav-link" data-scroll="lecture-card"><span class="nav-icon">▤</span> Lecture memory</button>
-        <button class="nav-link" data-scroll="question-card"><span class="nav-icon">✧</span> Ask Hoshyar</button>
-        <button class="nav-link" data-scroll="integrations"><span class="nav-icon">⎔</span> Connections</button>
-      </nav>
-      <div class="sidebar-separator"></div>
-      <div class="nav-caption">YOUR CLASSROOM</div>
-      <div class="current-class"><div class="class-mini-icon">⚡</div><div><strong id="sideLectureName">class-001</strong><small>Current lesson</small></div><span class="class-dots">•••</span></div>
-      <div class="sidebar-bottom"><div class="side-avatar">H</div><div><strong>Hoshyar Workspace</strong><small>Private classroom preview</small></div><span class="green-dot"></span></div>
-    </aside>
-
-    <div class="main-shell" id="studio">
-      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong>Classroom Studio</strong></div><div class="top-actions"><span class="connection-dot"></span><span id="headerStatus">Interactive preview</span><button class="icon-button" type="button" id="helpBtn" title="Show instructions">?</button></div></header>
+<div class="main-shell" id="studio">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong>Classroom Studio</strong></div><div class="top-actions"><span class="connection-dot"></span><span id="headerStatus">Demo · No credits used</span><button class="icon-button" type="button" id="helpBtn" title="Show instructions">?</button></div></header>
       <main class="content">
         <section class="welcome">
-          <div class="welcome-content"><div class="eyebrow"><span class="eyebrow-star">✦</span> YOUR AI LECTURE COMPANION</div><h1>Every great lesson <span>deserves to be remembered.</span></h1><p>Capture what your teacher says, ask questions, and hear simple answers — in English or Kurdish Sorani.</p><div class="welcome-tags"><span>✧ AI-powered learning</span><span>◉ Voice &amp; text</span><span>◎ Kurdish Sorani</span></div></div>
+          <div class="welcome-content"><div class="eyebrow"><span class="eyebrow-star">✦</span> YOUR AI LECTURE COMPANION</div><h1>Learn any lecture. <span>One question at a time.</span></h1><p>Save lecture notes, ask a question, and learn with an easy example — in English or Kurdish Sorani.</p></div>
           <div class="orb" aria-hidden="true"><div class="orb-ring ring-one"></div><div class="orb-ring ring-two"></div><div class="orb-core"><span>✦</span></div><div class="orb-particle particle-one"></div><div class="orb-particle particle-two"></div></div>
         </section>
 
-        <section class="workspace-controls" aria-label="Workspace settings"><div class="workspace-id"><div><small>CURRENT LECTURE ID</small><label for="lectureId">Keep the same ID for teacher and students</label></div><div class="id-entry"><span>#</span><input id="lectureId" value="class-001" maxlength="64" spellcheck="false" aria-label="Lecture ID" /></div></div><div class="mode-switch" role="group" aria-label="Connection mode"><span>MODE</span><div class="segmented"><button id="demoMode" class="is-active" type="button" aria-pressed="true">Demo</button><button id="liveMode" type="button" aria-pressed="false" disabled title="Coming after secure login and backend setup">Live AI · Soon</button></div></div></section>
+        <section class="workspace-controls" aria-label="Workspace settings"><div class="workspace-id"><div><small>YOUR CLASSROOM</small><label for="lectureId">Switch lectures by entering the same ID</label></div><div class="id-entry"><span>#</span><input id="lectureId" value="class-001" maxlength="64" spellcheck="false" aria-label="Lecture ID" /></div></div><div class="mode-switch" role="group" aria-label="Connection mode"><span>MODE</span><div class="segmented"><button id="demoMode" class="is-active" type="button" aria-pressed="true">Demo</button><button id="liveMode" type="button" aria-pressed="false" disabled title="Coming after secure login and backend setup">Live AI · Soon</button></div></div></section>
 
-        <div class="section-heading"><div><span class="kicker">PERSONALIZE YOUR EXPERIENCE</span><h2>Language preferences</h2></div><span class="heading-hint">Independent controls for each step</span></div>
-        <section class="language-grid" aria-label="Language preferences">
+        <details class="settings-fold"><summary>⚙ Language settings <span>English · Kurdish · Auto detect</span></summary><section class="language-grid" aria-label="Language preferences">
           <div class="language-control"><div class="control-icon blue">◉</div><div class="language-copy"><strong>Teacher's voice</strong><span>Listening language</span></div><select id="listenLanguage" aria-label="Teacher's language"><option value="auto">Auto detect</option><option value="en">English</option><option value="ku">Kurdish Sorani</option></select></div>
           <div class="language-control"><div class="control-icon purple">◎</div><div class="language-copy"><strong>Student's question</strong><span>Question language</span></div><select id="questionLanguage" aria-label="Question language"><option value="auto">Auto detect</option><option value="en">English</option><option value="ku">Kurdish Sorani</option></select></div>
           <div class="language-control"><div class="control-icon teal">♫</div><div class="language-copy"><strong>Hoshyar's answer</strong><span>Reply language</span></div><select id="replyLanguage" aria-label="Reply language"><option value="auto">Auto detect</option><option value="en">English</option><option value="ku">Kurdish Sorani</option></select></div>
         </section>
 
+        </details>
         <section class="main-grid" aria-label="Hoshyar features">
           <article class="panel teacher-panel" id="lecture-card">
             <div class="panel-top"><div class="title-icon teacher-icon">◉</div><div class="panel-title"><h2>Capture your lecture</h2><p>Give Hoshyar the knowledge to remember.</p></div><span class="label-tag">TEACHER</span></div>
-            <div class="record-area"><div class="record-visual"><div class="waveform" id="teacherWave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><button id="teacherMic" type="button" class="record-button" aria-label="Start recording teacher audio"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="9" y="2.8" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg></button></div><div class="record-copy"><strong id="teacherRecordStatus">Ready to listen</strong><small id="teacherRecordHint">Get permission first. Tap the mic to record.</small></div><div class="record-meta"><span id="teacherTimer">00:00</span><span class="separator-dot">•</span><span>Max 60 seconds per clip</span></div></div>
-            <div class="muted-divider"><span>OR ADD LECTURE TEXT</span></div><label class="field-label" for="lectureText">Your teacher's explanation</label><textarea id="lectureText" rows="3" placeholder="Example: Today we learned Ohm's Law. Voltage equals current multiplied by resistance..."></textarea><div class="panel-footer"><span class="caption">Saved notes become context for answers.</span><button type="button" class="primary-button" id="saveNoteBtn">＋ Save to memory</button></div>
+            <div class="voice-preview"><button id="teacherMic" type="button" disabled title="Voice recording needs secure live AI">🎙 Record teacher · Coming soon</button><span>Voice transcription needs the private AI connection.</span></div><label class="field-label" for="lectureText">Your teacher's explanation</label><textarea id="lectureText" rows="3" placeholder="Example: Today we learned Ohm's Law. Voltage equals current multiplied by resistance..."></textarea><div class="panel-footer"><span class="caption">Saved notes become context for answers.</span><button type="button" class="primary-button" id="saveNoteBtn">＋ Save to memory</button></div>
             <div class="saved-section"><div class="saved-heading"><strong>Saved in this session</strong><span id="segmentCount">0 segments</span></div><div id="savedNotes" class="notes-list"><div class="empty-state"><span>▤</span><p>Your teacher's notes will appear here.</p></div></div></div>
           </article>
 
           <article class="panel question-panel" id="question-card"><div class="panel-top"><div class="title-icon question-icon">✧</div><div class="panel-title"><h2>Ask Hoshyar AI</h2><p>Any question, explained in simple words.</p></div><span class="label-tag question-label">STUDENT</span></div>
             <div class="conversation" id="conversation" aria-live="polite"><div class="starter"><div class="assistant-avatar">✦</div><div class="starter-bubble"><strong>Hi, I'm Hoshyar! 👋</strong><p>Ask me about your lesson. I'll explain it step by step, just like a helpful study buddy.</p><div class="suggestion-list"><button type="button" class="suggestion" data-question="Explain the main idea of this lecture">Explain this lecture ↗</button><button type="button" class="suggestion" data-question="Give me a simple example">Show a simple example ↗</button></div></div></div></div>
-            <form class="compose" id="askForm"><label class="field-label" for="questionInput">Your question</label><textarea id="questionInput" placeholder="Type your question... or use the microphone." rows="3" required></textarea><div class="composer-actions"><button id="studentMic" type="button" class="secondary-button" aria-label="Record student question"><span>◉</span><span id="studentMicLabel">Record question</span></button><button class="primary-button" type="submit" id="askButton">Ask Hoshyar <span>↗</span></button></div></form>
+            <form class="compose" id="askForm"><label class="field-label" for="questionInput">Your question</label><textarea id="questionInput" placeholder="Type your question... or use the microphone." rows="3" required></textarea><div class="composer-actions"><button id="studentMic" type="button" class="secondary-button" disabled title="Voice questions are coming with secure live AI" aria-label="Record student question"><span>◉</span><span id="studentMicLabel">Record question</span></button><button class="primary-button" type="submit" id="askButton">Ask Hoshyar <span>↗</span></button></div></form>
             <div class="answer-controls"><div class="answer-tip">✦ Want to hear the answer?</div><button type="button" id="speakBtn" class="listen-button" disabled>♫ Speak answer</button></div>
           </article>
         </section>
 
-        <section class="integration-panel" id="integrations"><div class="integration-heading"><div><span class="kicker">POWERED BY YOUR N8N WORKFLOWS</span><h2>How everything connects</h2></div><span class="status-dot-label"><span></span> Public preview • AI not yet activated</span></div><div class="integration-steps"><div class="workflow-pill"><div class="workflow-visual">▤</div><div><strong>01 · Lecture memory</strong><span>Store teacher transcripts</span></div></div><div class="step-arrow">→</div><div class="workflow-pill"><div class="workflow-visual">✦</div><div><strong>02 · Gemini Q&amp;A</strong><span>Understand your questions</span></div></div><div class="step-arrow">→</div><div class="workflow-pill"><div class="workflow-visual">♫</div><div><strong>03 · ElevenLabs Voice</strong><span>Listen and speak naturally</span></div></div></div><div class="integration-warning"><span>ⓘ</span><div><strong>Safe preview mode</strong><p>This public preview is demo-only and makes no Gemini or ElevenLabs requests. Live AI will be enabled after secure authentication and server-side API protection.</p></div></div></section>
+        <section class="preview-caption" role="note">ⓘ <strong>Demo only.</strong> This is not connected to Gemini or ElevenLabs yet. No API keys or paid requests are used.</section>
         <footer>Built for curious minds. <span>Hoshyar AI · هۆشیار</span></footer>
       </main>
     </div>
